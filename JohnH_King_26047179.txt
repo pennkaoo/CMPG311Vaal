@@ -1,0 +1,485 @@
+mysql> create database BidvestBank;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> use BidvestBank;
+Database changed
+mysql> create table BankBranch(
+    -> branch_name varchar(10) not null primary key,
+    -> branch_city varchar(10) not null,
+    -> assests varchar(7));
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> create table Customer(
+    -> customer_name varchar(10) not null primary key,
+    -> customert_street varchar(10) not null,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> create table Customer(
+    -> customer_name varchar(10) not null primary key,
+    -> customer_street varchar(10) not null,
+    -> customer_city varchar(10) not null);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> create table CustomerAccount(
+    -> account_number char(5) not null primary key,
+    -> branch_name varchar(10),
+    -> balance double);
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> create table Loan(
+    -> loan_number varchar(4) not null primary,
+    -> branch_name varchar(10) not null,
+    -> amount double);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+branch_name varchar(10) not null,
+amount double)' at line 2
+mysql> create table Loan(
+    -> loan_number varchar(4) not null primary,
+    -> branch_name varchar(10) not null,
+    -> amount double
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+branch_name varchar(10) not null,
+amount double
+)' at line 2
+mysql> create table Loan(
+    -> loan_number varchar(4) not null primary key,
+    -> branch_name varchar(10) not null foreign key,
+    -> amount double
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key,
+amount double
+)' at line 3
+mysql> create table Loan(
+    -> loan_number varchar(4) not null primary key,
+    -> branch_name varchar(10) not null,
+    -> amount double
+    -> );
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> create table Depositor(
+    -> customer_name varchar(10) not null,
+    -> account_number not null primary key);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null primary key)' at line 3
+mysql> create table Depositor(
+    -> customer_name varchar(10) not null,
+    -> account_number varchar(10) not null primary key);
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> create table Borrower(
+    -> customer_name varchar(10) not null,
+    -> loan_number varchar(4) not null primary key);
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> create table Employee(
+    -> employee_name not null primary key,
+    -> branch_name varchar(10) not null,
+    -> salary double);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null primary key,
+branch_name varchar(10) not null,
+salary double)' at line 2
+mysql> create table Employee(
+    -> employee_name varchar(10) not null primary key,
+    -> branch_name varchar(10) not null,
+    -> salary int not null);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> insert into CustomerAccount values('A-5324', 'Newtown', 500);
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> ALTER TABLE CustomerAccount ALTER COLUMN account_number varchar(5) not null primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(5) not null primary key' at line 1
+mysql> ALTER TABLE CustomerAccount ALTER COLUMN account_number varchar(5) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(5) not null' at line 1
+mysql> ALTER TABLE CustomerAccount CHANGE account_number varchar(5) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(5) not null' at line 1
+mysql> ALTER TABLE CustomerAccount CHANGE account_number varchar(5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(5)' at line 1
+mysql> ALTER TABLE CustomerAccount MODIFY account_number varchar(5) not null primary key;
+ERROR 1068 (42000): Multiple primary key defined
+mysql> ALTER TABLE CustomerAccount MODIFY account_number varchar(5) not null;
+Query OK, 0 rows affected (0.43 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into CustomerAccount values('A-5324', 'Newtown', 500);
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> ALTER TABLE CustomerAccount MODIFY account_number varchar(10) not null;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into CustomerAccount values('A-5324', 'Newtown', 500);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CustomerAccount values('A-5624', 'Sunnyside', 400);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into CustomerAccount values('A-7794', 'Midrand", 900);
+    '>
+    '> ;
+    '> ;
+    '> ;;;
+    '> ;;;
+    '> insert into CustomerAccount values('A-7794', 'Midrand", 900);
+    "> insert into CustomerAccount values('A-7794', 'Midrand", 900);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'A-7794', 'Midrand", 900);
+insert into CustomerAccount values('A-7794', 'Midrand"' at line 7
+mysql> insert into CustomerAccount values('A-7794', 'Midrand', 900);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into CustomerAccount values('A_4467', 'Mabopane', 700);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into CustomerAccount values('A-3546', 'Midrand', 750);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into CustomerAccount values('A-3453', 'Universitas', 700);
+ERROR 1406 (22001): Data too long for column 'branch_name' at row 1
+mysql> ALTER TABLE CustomerAccount MODIFY branch_name varchar(11) not null;
+Query OK, 0 rows affected (0.38 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into CustomerAccount values('A-3453', 'Universitas', 700);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into CustomerAccount values('A-2542', 'Mamelodi', 350);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into BankBranch values('Midrand', 'Johannesburg', 7100000);
+ERROR 1406 (22001): Data too long for column 'branch_city' at row 1
+mysql> ALTER TABLE BankBranch MODIFY branch_city varchar(12) not null;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into BankBranch values('Midrand', 'Johannesburg', 7100000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into BankBranch values('NewTown', 'Johannesburg', 9000000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into BankBranch values('Mabopane', 'Pretoria', 400000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into BankBranch values('Belgravia', 'Kimberley', 3700000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into BankBranch values('Sunnyside', 'Pretoria', 1700000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into BankBranch values('Amanzimtoti', 'Durban', 300000);
+ERROR 1406 (22001): Data too long for column 'branch_name' at row 1
+mysql> ALTER TABLE BankBranch MODIFY branch_name varchar(12) not null;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into BankBranch values('Amanzimtoti', 'Durban', 300000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values('Universitas', 'Bloemfontein', 2100000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into BankBranch values('Mamelodi', 'Pretoria', 8000000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into customer values('Modise', 'Spring',  'George');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer values('Brooks', 'Senator',  'Johannesburg');
+ERROR 1406 (22001): Data too long for column 'customer_city' at row 1
+mysql> ALTER TABLE customer MODIFY customer_city varchar(12) not null;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into customer values('Brooks', 'Senator',  'Johannesburg');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into customer values('Jooste', 'North',  'Kimberly');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into customer values('Lombard', 'Sand Hill', 'Nelspruit');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into customer values('Mokwena', 'Walnut', 'Port-Elizabeth');
+ERROR 1406 (22001): Data too long for column 'customer_city' at row 1
+mysql> ALTER TABLE customer MODIFY customer_city varchar(15) not null;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into customer values('Mokwena', 'Walnut', 'Port-Elizabeth');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into customer values('Johnson', 'Mmabatho', 'Mafikeng');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into customer values('Johnson', 'Alma', 'Bloemfontein');
+ERROR 1062 (23000): Duplicate entry 'Johnson' for key 'PRIMARY'
+mysql> insert into customer values('Johnsonn', 'Alma', 'Bloemfontein');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into customer values('Zwane', 'Main', 'Mafikeng');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into customer values('Lindsay', 'Park', 'George');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into customer values('Smith', 'North', 'Kimberly');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into customer values('Dlamini', 'Putnam', 'Port-Elizabeth');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into customer values('Williams', 'Nassau', 'Giyane');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into depositor values('Johnson', 'A-5624');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into depositor values('Johnson', 'A-5624');
+ERROR 1062 (23000): Duplicate entry 'A-5624' for key 'PRIMARY'
+mysql> insert into depositor values('Johnson', 'A-7794');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into depositor values('Zwane', 'A-3546');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into depositor values('Lindsay', 'A-3453');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into depositor values('Smith', 'A-4467');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into depositor values('Dlamini', 'A-2542');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into loan values('L-11', 'Mamelodi', 900);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into loan values('L-14', 'Newtown', 1500);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into loan values('L-15', 'Sunnyside', 1500);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into loan values('L-15', 'Sunnyside', 1300);
+ERROR 1062 (23000): Duplicate entry 'L-15' for key 'PRIMARY'
+mysql> insert into loan values('L-16', 'Sunnyside', 1300);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into loan values('L-17', 'Newtown', 1000);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into loan values('L-23', 'Universitas', 2000);
+ERROR 1406 (22001): Data too long for column 'branch_name' at row 1
+mysql> ALTER TABLE loan MODIFY branch_name varchar(11) not null;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into loan values('L-23', 'Universitas', 2000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into loan values('L-93', 'Mabopane', 500);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into borrower values('Modise', 'L-16');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into borrower values('Jooste', 'L-93');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into borrower values('Johnson', 'L-15' );
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into borrower values('Jackson', 'L-14' );
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into borrower values('Zwane', 'L-17' );
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into borrower values('Smith', 'L-11' );
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into borrower values('Smith', 'L-23' );
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into borrower values('Williams', 'L-17' );
+ERROR 1062 (23000): Duplicate entry 'L-17' for key 'PRIMARY'
+mysql> insert into employee values('Modise', 'Sunnyside',  1500);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values('Brown', 'Sunnyside', 1300 );
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values('Gopal', 'Sunnyside', 5300);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('Johnson', 'Newtown',  1500);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee values('Loreena', 'Newtown',  1300);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into employee values('Peterson', 'Newtown',  2500);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee values('Roa', 'Austin', 1500);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee values('Sato', 'Austin', 1600 );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT CustomerAccount where balance<700;
+ERROR 1054 (42S22): Unknown column 'CustomerAccount' in 'field list'
+mysql> SELECT BidvestBank from CustomerAccount where balance<700;
+ERROR 1054 (42S22): Unknown column 'BidvestBank' in 'field list'
+mysql> SELECT * from CustomerAccount where balance<700;
++----------------+-------------+---------+
+| account_number | branch_name | balance |
++----------------+-------------+---------+
+| A-2542         | Mamelodi    |     350 |
+| A-5324         | Newtown     |     500 |
+| A-5624         | Sunnyside   |     400 |
++----------------+-------------+---------+
+3 rows in set (0.02 sec)
+
+mysql> SELECT * from customer where customer_city = 'Johannesburg'
+    -> ;
++---------------+-----------------+---------------+
+| customer_name | customer_street | customer_city |
++---------------+-----------------+---------------+
+| Brooks        | Senator         | Johannesburg  |
++---------------+-----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * from employees where salary > 1500 and branch_name != Newtown;
+ERROR 1146 (42S02): Table 'bidvestbank.employees' doesn't exist
+mysql> SELECT * from employee where salary > 1500 and branch_name != Newtown;
+ERROR 1054 (42S22): Unknown column 'Newtown' in 'where clause'
+mysql> SELECT * from employee where salary > 1500 and branch_name != 'Newtown';
++---------------+-------------+--------+
+| employee_name | branch_name | salary |
++---------------+-------------+--------+
+| Gopal         | Sunnyside   |   5300 |
+| Sato          | Austin      |   1600 |
++---------------+-------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT avg(salary) from employee;
++-------------+
+| avg(salary) |
++-------------+
+|   2062.5000 |
++-------------+
+1 row in set (0.04 sec)
+
+mysql> SELECT max(assests) from bankbranch;
++--------------+
+| max(assests) |
++--------------+
+| 9000000      |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT max(assests) AS 'avg_salary' from bankbranch;
++------------+
+| avg_salary |
++------------+
+| 9000000    |
++------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT * from employees where branch_name = 'Sunnyside';
+ERROR 1146 (42S02): Table 'bidvestbank.employees' doesn't exist
+mysql> SELECT * from employee where branch_name = 'Sunnyside';
++---------------+-------------+--------+
+| employee_name | branch_name | salary |
++---------------+-------------+--------+
+| Brown         | Sunnyside   |   1300 |
+| Gopal         | Sunnyside   |   5300 |
+| Modise        | Sunnyside   |   1500 |
++---------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> Select * from borrower;
++---------------+-------------+
+| customer_name | loan_number |
++---------------+-------------+
+| Smith         | L-11        |
+| Jackson       | L-14        |
+| Johnson       | L-15        |
+| Modise        | L-16        |
+| Zwane         | L-17        |
+| Smith         | L-23        |
+| Jooste        | L-93        |
++---------------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> Select account_number from customeraccount where balance > 900
+    -> ;
+Empty set (0.00 sec)
+
+mysql> Select account_number, balance from customeraccount where branch-name = 'Newtown' and balance > 600;
+ERROR 1054 (42S22): Unknown column 'branch' in 'where clause'
+mysql> Select account_number, balance from customeraccount where branch_name = 'Newtown' and balance > 600;
+Empty set (0.00 sec)
+
+mysql> Select branch_name, assests from bankbranch;
++-------------+---------+
+| branch_name | assests |
++-------------+---------+
+| Amanzimtoti | 300000  |
+| Belgravia   | 3700000 |
+| Mabopane    | 400000  |
+| Mamelodi    | 8000000 |
+| Midrand     | 7100000 |
+| NewTown     | 9000000 |
+| Sunnyside   | 1700000 |
+| Universitas | 2100000 |
++-------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT customer_name from customer where customer_city = 'Johannesburg'
+    -> ;
++---------------+
+| customer_name |
++---------------+
+| Brooks        |
++---------------+
+1 row in set (0.24 sec)
+
+mysql> SELECT avg(assests) AS 'avg_salary' from bankbranch;
++------------+
+| avg_salary |
++------------+
+|    4037500 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT avg(salary) AS 'avg_salary' from bankbranch;
+ERROR 1054 (42S22): Unknown column 'salary' in 'field list'
+mysql> SELECT avg(salary) AS 'avg_salary' from employee;
++------------+
+| avg_salary |
++------------+
+|  2062.5000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * where MAX(assests) from bankbranch;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from bankbranch' at line 1
+mysql> SELECT * where from bankbranch where MAX(assets);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from bankbranch where MAX(assets)' at line 1
+mysql> Select branch_name, MAX(assests) from bankbranch;
++-------------+--------------+
+| branch_name | MAX(assests) |
++-------------+--------------+
+| Amanzimtoti | 9000000      |
++-------------+--------------+
+1 row in set (0.05 sec)
+
+mysql> SELECT employee_name from employee where branch_name = 'Sunnyside';
++---------------+
+| employee_name |
++---------------+
+| Brown         |
+| Gopal         |
+| Modise        |
++---------------+
+3 rows in set (0.02 sec)
